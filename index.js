@@ -5,7 +5,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const Job = require("./models/Job");
-const AppliedJob = require("./models/AppliedJob"); // ✅ FIXED
+const AppliedJob = require("./models/AppliedJob");
 const User = require("./models/User");
 
 const bcrypt = require("bcryptjs");
@@ -29,6 +29,7 @@ mongoose
   .catch((err) => {
     console.log("MongoDB Error ❌:", err);
   });
+
 /* ---------------- HOME ---------------- */
 
 app.get("/", (req, res) => {
@@ -56,13 +57,21 @@ app.post("/add-job", async (req, res) => {
   }
 });
 
-const jobs = await Job.insertMany([
-  { title: "Frontend Developer", company: "Google", location: "Bangalore" },
-  { title: "Backend Developer", company: "Amazon", location: "Hyderabad" },
-  { title: "Software Engineer", company: "Microsoft", location: "Pune" },
-]);
+/* ---------------- ADD SAMPLE DATA ---------------- */
 
-res.json(jobs);
+app.get("/add-sample", async (req, res) => {
+  try {
+    const jobs = await Job.insertMany([
+      { title: "Frontend Developer", company: "Google", location: "Bangalore" },
+      { title: "Backend Developer", company: "Amazon", location: "Hyderabad" },
+      { title: "Software Engineer", company: "Microsoft", location: "Pune" },
+    ]);
+
+    res.json(jobs);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
 /* ---------------- APPLY JOB ---------------- */
 

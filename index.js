@@ -1,10 +1,11 @@
 require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
 const Job = require("./models/Job");
-const AppliedJob = require("./models/Appliedjob");
+const AppliedJob = require("./models/AppliedJob"); // ✅ FIXED
 const User = require("./models/User");
 
 const bcrypt = require("bcryptjs");
@@ -12,9 +13,9 @@ const jwt = require("jsonwebtoken");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const JWT_SECRET = "jobsearch_secret_key_123";
+const JWT_SECRET = process.env.JWT_SECRET || "jobsearch_secret_key_123";
+
 const authMiddleware = require("./middleware/auth");
-require("dotenv").config();
 
 // Middleware
 app.use(cors());
@@ -26,6 +27,7 @@ mongoose
   .connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDB Connected ✅"))
   .catch((err) => console.log(err));
+
 /* ---------------- HOME ---------------- */
 
 app.get("/", (req, res) => {
@@ -90,6 +92,7 @@ app.post("/apply-job", authMiddleware, async (req, res) => {
     res.status(500).send(error);
   }
 });
+
 /* ---------------- APPLICATIONS ---------------- */
 
 app.get("/applications", async (req, res) => {

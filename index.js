@@ -4,7 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const Job = require("./models/Job");
-const AppliedJob = require("./models/AppliedJob");
+const AppliedJob = require("./models/Appliedjob");
 const User = require("./models/User");
 
 const bcrypt = require("bcryptjs");

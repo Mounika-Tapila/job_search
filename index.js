@@ -56,19 +56,13 @@ app.post("/add-job", async (req, res) => {
   }
 });
 
-app.get("/add-sample", async (req, res) => {
-  try {
-    await Job.insertMany([
-      { title: "Frontend Developer", company: "Google", location: "Bangalore" },
-      { title: "Backend Developer", company: "Amazon", location: "Hyderabad" },
-      { title: "Software Engineer", company: "Microsoft", location: "Pune" },
-    ]);
+const jobs = await Job.insertMany([
+  { title: "Frontend Developer", company: "Google", location: "Bangalore" },
+  { title: "Backend Developer", company: "Amazon", location: "Hyderabad" },
+  { title: "Software Engineer", company: "Microsoft", location: "Pune" },
+]);
 
-    res.send("Sample Jobs Added ✅");
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
+res.json(jobs);
 
 /* ---------------- APPLY JOB ---------------- */
 

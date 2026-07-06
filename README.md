@@ -206,7 +206,7 @@ Add screenshots of:
 **Tapila Mounika**
 
 * GitHub: https://github.com/Mounika-Tapila
-* Email: [t.mounisudha@gmail.com](mailto:t.mounisudha@gmail.com)
+
 
 ---
 
